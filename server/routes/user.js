@@ -3,8 +3,13 @@ import User from "../models/user.js";
 
 const router = Router();
 
-router.get("/", (req, res) => {
-    res.send("Lele user");
+router.get("/getAllUsers", async (req, res) => {
+    try {
+        const users = await User.find();
+        res.json(users);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
 });
 
 router.post("/createUser", async (req, res) => {
@@ -33,6 +38,6 @@ router.post("/createUser", async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 
-})
+});
 
 export default router;

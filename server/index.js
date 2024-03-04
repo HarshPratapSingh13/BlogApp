@@ -18,8 +18,8 @@ mongoose
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use("/user", userRoute);
+app.use("/api/user", userRoute);
 
 app.listen(process.env.PORT, () => {
     console.log(`✅ Backend running on http://localhost:${process.env.PORT}`);
-})
+});
