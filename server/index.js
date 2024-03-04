@@ -1,6 +1,7 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
+import bodyParser from 'body-parser';
 
 const app = express();
 dotenv.config();
@@ -14,10 +15,10 @@ mongoose
   .then(console.log("✅ Connected to MongoDB"))
   .catch((err) => console.log(err));
 
-app.get("/" , (req, res) => {
-    res.send(`hello world`);
-});
-app.use("/getUsers", userRoute);
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use("/user", userRoute);
 
 app.listen(process.env.PORT, () => {
     console.log(`✅ Backend running on http://localhost:${process.env.PORT}`);
