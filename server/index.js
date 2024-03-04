@@ -19,6 +19,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use("/api/user", userRoute);
+app.use("/api/auth", authRoute);
 
 app.listen(process.env.PORT, () => {
     console.log(`✅ Backend running on http://localhost:${process.env.PORT}`);
