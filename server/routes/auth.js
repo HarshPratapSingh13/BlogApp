@@ -6,6 +6,7 @@ import jwt from 'jsonwebtoken';
 
 const router = Router();
 
+
 router.post('/signup', async (req, res) => {
     
     try {
@@ -33,6 +34,7 @@ router.post('/signup', async (req, res) => {
     }
 });
 
+
 router.post('/login', async (req, res) => {
     try {
         const { usernameOrEmail, password } = req.body;
@@ -58,6 +60,10 @@ router.post('/login', async (req, res) => {
     }
 });
 
+
+/**
+ * @description There is no server-side action needed, only the token stored at client side needs to be discarded.
+ */
 router.get('/logout', (req, res) => {});
 
 export default router;
