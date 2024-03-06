@@ -8,7 +8,7 @@ const postSchema = new mongoose.Schema({
         required: true,
         unique: true,
     },
-    desc: {
+    body: {
         type: String,
         required: true,
     },
@@ -16,7 +16,7 @@ const postSchema = new mongoose.Schema({
         type: String,
         required: false,
     },
-    username: {
+    userId: {
         type: String,
         required: true,
     },
