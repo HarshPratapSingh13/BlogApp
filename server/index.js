@@ -13,8 +13,8 @@ const { MONGODB, PORT, SECRET_ACCESS_TOKEN } = process.env;
 import userRoute from "./routes/user.js";
 import authRoute from "./routes/auth.js";
 import postRoute from "./routes/post.js";
-import protectedRoute from "./routes/protectedRoute.js"
 import categoryRoute from "./routes/category.js";
+import protectedRoute from "./routes/protectedRoute.js";
 
 mongoose
   .connect(MONGODB)
@@ -30,8 +30,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use("/api/user", userRoute);
 app.use("/api/auth", authRoute);
 app.use("/api/post", postRoute);
-app.use('/api/protected', protectedRoute);
 app.use('/api/category', categoryRoute);
+app.use('/api/protected', protectedRoute);
 
 const port = PORT || 8668;
 

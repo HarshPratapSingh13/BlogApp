@@ -2,11 +2,9 @@ import mongoose from "mongoose";
 
 const postSchema = new mongoose.Schema({
 
-
     title: {
         type: String,
         required: true,
-        unique: true,
     },
     body: {
         type: String,
@@ -16,21 +14,20 @@ const postSchema = new mongoose.Schema({
         type: String,
         required: false,
     },
-    userId: {
+    username: {
         type: String,
         required: true,
     },
     categories: {
         type: Array,
-        required: false,
+        required: true,
     },
     },
     {
          timestamps: true
     }   
     
-)
-
+);
 
 const Post = mongoose.model('Post' , postSchema, 'Post');
-export default Post ; 
+export default Post; 
