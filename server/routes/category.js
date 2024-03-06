@@ -1,28 +1,29 @@
-import Category from "../models/category.js"
 import { Router } from "express";
+import Category from "../models/category.js"
 
 const router = Router();
 
-router.get("/getAllCategories", async (req, res) =>{
+
+router.get("/getAllCategories", async (req, res) => {
 
     try {
         const categories = await Category.find();
         res.json(categories);
     }
-    
+
     catch (error) {
         res.status(500).json({ message: error.message });
-    }    
+    }
+});
 
-})
 
-router.post("/createCategory", async (req, res) =>{
+router.post("/createCategory", async (req, res) => {
 
     try {
         const {name} = req.body;
 
         const existingCategory = await Category.findOne({ name });
-       
+
         if (existingCategory) {
             return res.status(400).json({ message: '❌ Category already exists.' });
         }
@@ -36,10 +37,10 @@ router.post("/createCategory", async (req, res) =>{
     catch(err) {
         res.status(500).json({"errors": err.errors});
     }
-    
 });
 
-router.get("/getCategoryById" , async  (req, res) =>{
+
+router.get("/getCategoryById" , async  (req, res) => {
 
     try {
         const id = req.query.id;
@@ -48,10 +49,10 @@ router.get("/getCategoryById" , async  (req, res) =>{
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
+});
 
-})
 
-router.delete("/deleteCategory" , async (req, res) =>{
+router.delete("/deleteCategory" , async (req, res) => {
 
     try {
         const categoryId = req.query.id;
@@ -70,10 +71,7 @@ router.delete("/deleteCategory" , async (req, res) =>{
 
     } catch (error) {
         res.status(500).json({ message: error.message });
-    }    
+    }
+});
 
-    
-
-})
-
-export default router ; 
+export default router;
