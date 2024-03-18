@@ -6,6 +6,17 @@ import jwt from 'jsonwebtoken';
 
 const router = Router();
 
+/**
+ * @swagger
+ * /api/auth/signup:
+ *   get:
+ *     description: Create an User
+ *     responses:
+ *       200:
+ *         description: Successful response
+ *       500:
+ *         description: Internal server error
+ */
 
 router.post('/signup', async (req, res) => {
     
@@ -34,7 +45,17 @@ router.post('/signup', async (req, res) => {
     }
 });
 
-
+/**
+ * @swagger
+ * /api/auth/login:
+ *   get:
+ *     description: Authenticate an user and log in
+ *     responses:
+ *       200:
+ *         description:Login Successful 
+ *       500:
+ *         description: Internal server error
+ */
 router.post('/login', async (req, res) => {
     try {
         const { usernameOrEmail, password } = req.body;

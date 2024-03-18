@@ -6,6 +6,18 @@ import postValidator from "../middleware/postValidator.js";
 const router = Router();
 
 
+/**
+ * @swagger
+ * /api/post/getAllPosts:
+ *   get:
+ *     description: Gives a list of all the posts .
+ *     responses:
+ *       200:
+ *         description: Returns list of all the posts present in json format
+ *       500:
+ *         description: Internal server error
+ */
+
 router.get("/getAllPosts" , async (req, res) => {
 
     const username = req.query.username;
@@ -33,7 +45,17 @@ router.get("/getAllPosts" , async (req, res) => {
     }
 });
 
-
+/**
+ * @swagger
+ * /api/post/getPostById:
+ *   get:
+ *     description: Returns Post from post id.
+ *     responses:
+ *       200:
+ *         description: Returns Post in json format. 
+ *       500:
+ *         description: Internal server error
+ */
 router.get("/getPostById", async (req, res) => {
     try {
         const id = req.query.id;
@@ -44,7 +66,19 @@ router.get("/getPostById", async (req, res) => {
     }
 });
 
-
+/**
+ * @swagger
+ * /api/post/createPost:
+ *   post:
+ *     description: Creates a new post.
+ *     responses:
+ *       200:
+ *         description: Post created successfully
+ *       401 :
+ *         description: Unathorized attempt.
+ *       500:
+ *         description: Internal server error
+ */
 router.post("/createPost", verifyToken, async (req, res) => {
 
     try {
@@ -77,7 +111,23 @@ router.post("/createPost", verifyToken, async (req, res) => {
 
 });
 
-
+/**
+ * @swagger
+ * /api/post/updatePost:
+ *   put:
+ *     description: Update a post from postid.
+ *     responses:
+ *       200:
+ *         description: Post updated successfully
+ *       401 :
+ *         description: Unathorized attempt.
+ *       404 :
+ *         description: Post not found.
+ *       406 :
+ *         description: You can ony change your post.
+ *       500:
+ *         description: Internal server error
+ */
 router.put("/updatePost", verifyToken, async (req, res) => {
 
     try {
@@ -116,7 +166,23 @@ router.put("/updatePost", verifyToken, async (req, res) => {
     }
 });
 
-
+/**
+ * @swagger
+ * /api/post/deletePost:
+ *   delete:
+ *     description: Delete a post from postid.
+ *     responses:
+ *       200:
+ *         description: Post deleted successfully
+ *       401 :
+ *         description: Unathorized attempt.
+ *       404 :
+ *         description: Post not found.
+ *       406 :
+ *         description: You can only delete your post.
+ *       500:
+ *         description: Internal server error
+ */
 router.delete("/deletePost", verifyToken,  async (req, res) => {
 
     try {
@@ -141,7 +207,7 @@ router.delete("/deletePost", verifyToken,  async (req, res) => {
 
         await post.deleteOne();
 
-        res.status(200).json({ message: '✅ Post delelted successfully'  });
+        res.status(200).json({ message: '✅ Post deleted successfully'  });
     } catch (error) {
         res.status(500).json({ message: error.message });
     }    

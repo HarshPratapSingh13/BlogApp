@@ -3,6 +3,17 @@ import Category from "../models/category.js"
 
 const router = Router();
 
+/**
+ * @swagger
+ * /api/category/getAllCategories:
+ *   get:
+ *     description: Gives a list of all the categories present.
+ *     responses:
+ *       200:
+ *         description: Returns list of all the categories present in json format
+ *       500:
+ *         description: Internal server error
+ */
 
 router.get("/getAllCategories", async (req, res) => {
 
@@ -16,7 +27,19 @@ router.get("/getAllCategories", async (req, res) => {
     }
 });
 
-
+/**
+ * @swagger
+ * /api/category/createCategory:
+ *   post:
+ *     description: Creates a new category.
+ *     responses:
+ *       200:
+ *         description: Category created successfully
+ *       400 :
+ *         description: Category already exists.
+ *       500:
+ *         description: Internal server error
+ */
 router.post("/createCategory", async (req, res) => {
 
     try {
@@ -39,7 +62,17 @@ router.post("/createCategory", async (req, res) => {
     }
 });
 
-
+/**
+ * @swagger
+ * /api/category/getCategory:
+ *   get:
+ *     description: Returns category name for category id.
+ *     responses:
+ *       200:
+ *         description: Returns Category in json format. 
+ *       500:
+ *         description: Internal server error
+ */
 router.get("/getCategoryById" , async  (req, res) => {
 
     try {
@@ -52,6 +85,21 @@ router.get("/getCategoryById" , async  (req, res) => {
 });
 
 
+/**
+ * @swagger
+ * /api/category/deleteCategory:
+ *   delete:
+ *     description: Delete a category from the database.
+ *     responses:
+ *       200:
+ *         description: Category deleted successfully
+ *       400 :
+ *         description: Unauthorized attempt  
+ *       404  :
+ *         description : Category is not present
+ *       500:
+ *         description: Internal server error
+ */
 router.delete("/deleteCategory" , async (req, res) => {
 
     try {

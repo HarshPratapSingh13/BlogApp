@@ -7,6 +7,17 @@ import verifyToken from "../middleware/authMiddleware.js";
 
 const router = Router();
 
+/**
+ * @swagger
+ * /api/user/getAllUsers:
+ *   get:
+ *     description: Gives a list of all the users .
+ *     responses:
+ *       200:
+ *         description: Returns list of all the users in json format
+ *       500:
+ *         description: Internal server error
+ */
 
 router.get("/getAllUsers", async (req, res) => {
     try {
@@ -17,18 +28,40 @@ router.get("/getAllUsers", async (req, res) => {
     }
 });
 
-
+/**
+ * @swagger
+ * /api/user/getUserById:
+ *   get:
+ *     description: Returns User from user id.
+ *     responses:
+ *       200:
+ *         description: Returns User in json format. 
+ *       500:
+ *         description: Internal server error
+ */
 router.get("/getUserbyId", async (req, res) => {
     try {
         const id = req.query.id;
         const user = await User.findById(id);
-        res.json(user);
+        res.status(200).json(user);
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
 });
 
-
+/**
+ * @swagger
+ * /api/user/createUser:
+ *   post:
+ *     description: Creates a new User.
+ *     responses:
+ *       200:
+ *         description: User created successfully
+ *       400 :
+ *         description: Username or emal alreaddy exists.
+ *       500:
+ *         description: Internal server error
+ */
 router.post("/createUser", async (req, res) => {
     
     try {
@@ -56,6 +89,23 @@ router.post("/createUser", async (req, res) => {
     }
 });
 
+/**
+ * @swagger
+ * /api/user/updateUser:
+ *   put:
+ *     description: Update a User from userid.
+ *     responses:
+ *       200:
+ *         description: User updated successfully
+ *       401 :
+ *         description: Unathorized attempt.
+ *       404 :
+ *         description: User not found.
+ *       402 :
+ *         description: Old and new passwords are same.
+ *       500:
+ *         description: Internal server error
+ */
 
 router.put('/updateUser', verifyToken, async (req, res) => {
 
@@ -80,7 +130,7 @@ router.put('/updateUser', verifyToken, async (req, res) => {
 
             const passwordMatch = await bcrypt.compare(password, user.password);
             if (passwordMatch) {
-                return res.status(401).json({ message: '❌ New password and old password is same.' });
+                return res.status(402).json({ message: '❌ New password and old password is same.' });
             }
 
             const salt = await bcrypt.genSalt(10);
@@ -95,6 +145,21 @@ router.put('/updateUser', verifyToken, async (req, res) => {
     }
 });
 
+/**
+ * @swagger
+ * /api/user/deleteUser:
+ *   delete:
+ *     description: Delete a User from userid.
+ *     responses:
+ *       200:
+ *         description: User deleted successfully
+ *       401 :
+ *         description: Unathorized attempt.
+ *       404 :
+ *         description: User not found.
+ *       500:
+ *         description: Internal server error
+ */
 
 router.delete("/deleteUser", verifyToken, async (req, res) => {
     try {

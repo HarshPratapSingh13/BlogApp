@@ -15,6 +15,8 @@ import authRoute from "./routes/auth.js";
 import postRoute from "./routes/post.js";
 import categoryRoute from "./routes/category.js";
 import protectedRoute from "./routes/protectedRoute.js";
+import swaggerUi from 'swagger-ui-express';
+import swaggerSpec from './swagger.js';
 
 mongoose
   .connect(MONGODB)
@@ -26,6 +28,7 @@ app.disable("x-powered-by");
 app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 app.use("/api/user", userRoute);
 app.use("/api/auth", authRoute);
