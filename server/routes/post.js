@@ -56,10 +56,10 @@ router.get("/getAllPosts" , async (req, res) => {
  *       500:
  *         description: Internal server error
  */
-router.get("/getPostById", async (req, res) => {
+router.get("/:id", async (req, res) => {
     try {
-        const id = req.query.id;
-        const post = await Post.findById(id);
+       // const id = req.query.id;
+        const post = await Post.findById(req.params.id);
         res.json(post);
     } catch (error) {
         res.status(500).json({ message: error.message });
